@@ -45,7 +45,7 @@ type CLI struct {
 // BQJob is BigQuery Job Object
 type BQJob struct {
 	gorm.Model
-	JobID            string
+	JobID            string `gorm:"primary_key"`
 	Query            string
 	UserEmail        string
 	TotalBytesBilled int64
@@ -78,7 +78,6 @@ func PrintErrorf(format string, args ...interface{}) {
 func (b *BQCop) insert(ctx context.Context, it *bigquery.JobIterator) *bigquery.JobIterator {
 	job, err := it.Next()
 	if err != nil {
-		PrintErrorf("Unknown error.")
 		return nil
 	}
 	if job == nil {
@@ -149,6 +148,7 @@ func (b *BQCop) Do() int {
 			break
 		}
 	}
+	log.Printf("Finished.")
 
 	defer b.db.Close()
 	return ExitCodeOK
@@ -160,7 +160,7 @@ func connectDB(dialect string, source string) *gorm.DB {
 
 	db, err := gorm.Open(dialect, source)
 	if err != nil {
-		PrintErrorf("Failed to connect database.")
+		// done
 		return nil
 	}
 	db.AutoMigrate(&BQJob{})
