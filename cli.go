@@ -235,9 +235,15 @@ bqcop is a tool to fetch BigQuery jobs and store it to DB.
 
 Options:
 
-  -project-id      project id of BigQuery.
+  -project-id      Project ID of BigQuery.
 
-  -auth-json       auth file of BigQuery.
+  -auth-json       Auth File of BigQuery.
+
+  -db-dialect      Dialect of Database.
+				   default: sqlite3
+
+  -db-path         Path of Database.
+                   default: sqlite.db
 
   -d, --debug      Enable debug mode.
 
