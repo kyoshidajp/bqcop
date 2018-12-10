@@ -231,7 +231,7 @@ func (c *CLI) Run(args []string) int {
 
 var helpText = `Usage: bqcop -project-id=project-id -auth-json=auth-json [options...]
 
-bqcop is a tool to fetch BigQuery jobs and report which jobs are affected by cost.
+bqcop is a tool to fetch BigQuery jobs and store it to DB.
 
 Options:
 
