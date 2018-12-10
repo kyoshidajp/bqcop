@@ -116,7 +116,7 @@ func (b *BQCop) insert(ctx context.Context, it *bigquery.JobIterator) *bigquery.
 		EndTime:          stat.EndTime,
 	}
 
-	Debugf("Insert jobID: %s", id)
+	log.Printf("Insert jobID: %s", id)
 
 	b.db.Create(bqJob)
 	return it
@@ -155,10 +155,10 @@ func (b *BQCop) Do() int {
 }
 
 // connectDB connects data base
-func connectDB(dialect string, source string) *gorm.DB {
-	Debugf("Connect to: %s %s", dialect, source)
+func connectDB(dialect string, path string) *gorm.DB {
+	Debugf("Connect to: %s %s", dialect, path)
 
-	db, err := gorm.Open(dialect, source)
+	db, err := gorm.Open(dialect, path)
 	if err != nil {
 		// done
 		return nil
@@ -173,7 +173,7 @@ func (c *CLI) Run(args []string) int {
 	var (
 		auth      string
 		projectID string
-		dbName    string
+		dbDialect string
 		dbPath    string
 		debug     bool
 		version   bool
@@ -184,7 +184,7 @@ func (c *CLI) Run(args []string) int {
 	}
 	flags.StringVar(&auth, "auth-json", "", "")
 	flags.StringVar(&projectID, "project-id", "", "")
-	flags.StringVar(&dbName, "db-name", "sqlite3", "")
+	flags.StringVar(&dbDialect, "db-dialect", "sqlite3", "")
 	flags.StringVar(&dbPath, "db-path", dbFile, "")
 	flags.BoolVar(&debug, "debug", false, "")
 	flags.BoolVar(&debug, "d", false, "")
@@ -216,7 +216,7 @@ func (c *CLI) Run(args []string) int {
 		return ExitCodeBadArgs
 	}
 
-	db := connectDB(dbName, dbPath)
+	db := connectDB(dbDialect, dbPath)
 	if db == nil {
 		return ExitCodeError
 	}
