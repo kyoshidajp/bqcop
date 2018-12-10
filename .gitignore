@@ -1,0 +1,5 @@
+/vendor/
+/releases/
+.vscode/
+*.db
+*.sql
