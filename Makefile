@@ -43,7 +43,7 @@ build-windows-386:
 	@$(MAKE) build GOOS=windows GOARCH=386 SUFFIX=.exe
 
 build-linux-amd64:
-	 @$(MAKE) CC=x86_64-linux-musl-gcc CGO_ENABLED=1 GOOS=linux GOARCH=amd64
+	@$(MAKE) build GOOS=linux GOARCH=amd64
 
 build-linux-arm:
 	@$(MAKE) build GOOS=linux GOARCH=arm
@@ -52,7 +52,7 @@ build-linux-arm64:
 	@$(MAKE) build GOOS=linux GOARCH=arm64
 
 build-linux-386:
-	@$(MAKE) build GOOS=linux GOARCH=386 CC=x86_64-linux-musl-cc CGO_ENABLED=1
+	@$(MAKE) build GOOS=linux GOARCH=386
 
 build-darwin-amd64:
 	@$(MAKE) build GOOS=darwin GOARCH=amd64
