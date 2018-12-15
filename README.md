@@ -1,8 +1,11 @@
 # :policeman: bqcop
 
+[![GitHub release](https://img.shields.io/github/release/kyoshidajp/bqcop.svg?style=flat-square)][release]
+[![Travis](https://travis-ci.org/kyoshidajp/bqcop.svg?branch=master)](https://travis-ci.org/kyoshidajp/bqcop)
 [![Go Documentation](http://img.shields.io/badge/go-documentation-blue.svg?style=flat-square)][godocs]
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)][license]
 
+[release]: https://github.com/kyoshidajp/bqcop/releases
 [license]: https://github.com/kyoshidajp/bqcop/blob/master/LICENSE
 [godocs]: http://godoc.org/github.com/kyoshidajp/bqcop
 
@@ -62,6 +65,13 @@ If you are a Golang developper/user; then execute `go get`.
 ```
 $ go get -u github.com/kyoshidajp/bqcop
 ```
+
+### Manual
+
+1. Download binary which meets your system from [Releases](https://github.com/kyoshidajp/bqcop/releases).
+1. Unarchive it.
+1. Put `bqcop` where you want.
+1. Add `bqcop` path to `$PATH`.
 
 ## Author
 
