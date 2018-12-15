@@ -12,7 +12,7 @@ import (
 	"cloud.google.com/go/bigquery"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
-	"github.com/mattn/go-colorable"
+	colorable "github.com/mattn/go-colorable"
 	"github.com/mitchellh/colorstring"
 	"google.golang.org/api/option"
 )
@@ -106,12 +106,14 @@ func (b *BQCop) insert(ctx context.Context, it *bigquery.JobIterator) *bigquery.
 	}
 
 	id := job.ID()
+	details := job.LastStatus().Statistics.Details
+	qstat := details.(*bigquery.QueryStatistics)
 	stat := status.Statistics
 	bqJob := &BQJob{
 		JobID:            id,
 		Query:            query,
 		UserEmail:        job.Email(),
-		TotalBytesBilled: stat.TotalBytesProcessed,
+		TotalBytesBilled: qstat.TotalBytesBilled,
 		StartTime:        stat.StartTime,
 		EndTime:          stat.EndTime,
 	}
