@@ -107,7 +107,11 @@ func (b *BQCop) insert(ctx context.Context, it *bigquery.JobIterator) *bigquery.
 
 	id := job.ID()
 	details := job.LastStatus().Statistics.Details
-	qstat := details.(*bigquery.QueryStatistics)
+	qstat, ok := details.(*bigquery.QueryStatistics)
+	if !ok {
+		return it
+	}
+
 	stat := status.Statistics
 	bqJob := &BQJob{
 		JobID:            id,
